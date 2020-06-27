@@ -1,3 +1,7 @@
+### Skale - Arweave Bridge
+
+A WEbUI to conveniently store Skale Chain State on the Areave Storage Platform
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
