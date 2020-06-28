@@ -1,24 +1,36 @@
 import React from 'react'
+import GetLatestBlock from '../../hooks/getLatestBlock'
+import Flex from '../atoms/Flex'
+import Button from '../atoms/inputs/buttons/Button'
 
 const ItemRow = ({label, value}) => (
-  <div>
+  <Flex>
     <div>
       {label}
     </div>
     <div>
       {value}
     </div>
-  </div>
+  </Flex>
 )
 
-const Item = ({job}) => (
-  <div>
-    <h3>{job.name}</h3>
-    <ItemRow label="endpoint" value={job.endpoint} />
-    <ItemRow label="Data Type" value={job.dataType} /> 
-    <ItemRow label="Frequency" value={job.frequency} />  
-  </div>
-)
+const Item = ({job}) => {
+  const latestBlockNumber = GetLatestBlock(job.client)
+  const getLast10Blocks = async () => {
+    const blocks = await job.client.getBlockAndTxReceipts(latestBlockNumber - 1)
+    console.log(`got blocks ${JSON.stringify(blocks)}`)
+  }
+  return (
+    <div>
+      <h3>{job.name}</h3>
+      <ItemRow label="endpoint" value={job.endpoint} />
+      <ItemRow label="latest block" value={latestBlockNumber} />
+      <ItemRow label="Data Type" value={job.dataType} /> 
+      <ItemRow label="Frequency" value={job.frequency} />
+      <Button onClick={getLast10Blocks} label="Get 10" />
+    </div>
+  )
+  }
 
 
 export default Item
