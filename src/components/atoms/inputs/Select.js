@@ -16,18 +16,20 @@ const SelectUI = (props) => {
     )
 
   return (
-    <FormControl className={props.classes.formControl}>
-      <InputLabel>{props.label}</InputLabel>
-      <Select
-        {...field}
-        {...props}
-      >
-        {selectOptions}
-      </Select>
-      <ErrorMessage
-        isError={isError}
-        errorMsg={meta.error} />
-    </FormControl>
+    <div style={{paddingBottom: '1.25em'}}>
+      <FormControl className={props.classes.formControl}>
+        <InputLabel>{props.label}</InputLabel>
+        <Select
+          {...field}
+          {...props}
+        >
+          {selectOptions}
+        </Select>
+        <ErrorMessage
+          isError={isError}
+          errorMsg={meta.error} />
+      </FormControl>
+    </div>
   )
 }
 
