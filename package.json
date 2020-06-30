@@ -10,11 +10,13 @@
     "@testing-library/user-event": "^7.1.2",
     "arweave": "^1.7.1",
     "formik": "^2.1.4",
+    "local-storage": "^2.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
     "rimble-ui": "^0.14.0",
     "styled-components": "^5.1.1",
+    "uuid": "^8.2.0",
     "web3": "^1.2.9",
     "yup": "^0.29.1"
   },

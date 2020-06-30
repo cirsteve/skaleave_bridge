@@ -43,10 +43,17 @@ export const getBlockAndTxReceipts = async (web3, blockNumber) => {
 
 export const getLogs = (web3, filters) => web3.eth.getPastLogs(filters)
 
-export const getBlocks = async (web3, start, end, withTxs) => {
+export const getBlocks = (web3, start, end, withTxs) => {
+  const calls = []
+  for (start; start <= end; start++) {
+    calls.push(web3.eth.getBlock(start, withTxs))
+  }
+  return Promise.all(calls)
+}
+
+export const getBlocksBatch = async (web3, start, end, withTxs) => {
   const calls = []
   for(start; start <= end; start++) {
-    console.log(`geting block ${start} of ${end}`)
     calls.push((cb) => web3.eth.getBlock.request(start, withTxs, cb))
   }
   const blocks = await getPromisedBatch(web3, calls)
@@ -60,6 +67,7 @@ export const web3Client = (endpoint) => {
     getBlockNumber: (cb) => getBlockNumber(web3, cb),
     getBlock: (blockNumber) => getBlock(web3, blockNumber,true),
     getBlocks: (start, end) => getBlocks(web3, start, end, false),
+    getBlocksBatch: (start, end) => getBlocksBatch(web3, start, end, false),
     getBlocksAndTxs: (start, end) => getBlock(web3, start, end, true),
     getBlockAndTxReceipts: (blockNumber) => getBlockAndTxReceipts(web3, blockNumber)
 
