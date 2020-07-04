@@ -7,14 +7,12 @@ import { v4 as uuidv4 } from 'uuid';
 import { getJobs, addJob } from '../../storage'
 
 
-
 const loadJobs = (jobs) => jobs.map(job => {
   job.client = web3Client(job.endpoint)
   return job
 })
+
 const TransferJobs = () => {
-  const jobsx = getJobs()
-  console.log(`got jobs ${JSON.stringify(jobsx)}`)
   const [jobs, setJobs] = useState(loadJobs(getJobs()))
 
   const createJob = (job) => {
